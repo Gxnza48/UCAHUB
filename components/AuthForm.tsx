@@ -26,9 +26,16 @@ export default function AuthForm() {
       : await supabase.auth.signUp({ email, password });
 
     if (authError) {
-      if (authError.message.includes('Email not confirmed')) {
+      // Manejo de errores mejorado para límites de tasa y errores de red
+      const message = authError.message.toLowerCase();
+      
+      if (message.includes('rate limit')) {
+        setError('Has excedido el límite de intentos. Por favor, espera unos minutos o contacta al administrador para aumentar los límites en Supabase.');
+      } else if (message.includes('failed to fetch')) {
+        setError('Error de conexión: No se pudo contactar con el servidor. Verifica tu internet o si un bloqueador de anuncios está impidiendo la conexión a Supabase.');
+      } else if (message.includes('email not confirmed')) {
         setError('Debes confirmar tu correo electrónico antes de poder iniciar sesión. Revisa tu bandeja de entrada.');
-      } else if (authError.message.includes('Invalid login credentials')) {
+      } else if (message.includes('invalid login credentials')) {
         setError('Tus credenciales son incorrectas. Verifica tu contraseña y correo.');
       } else {
         setError(authError.message);
@@ -49,7 +56,7 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 md:p-10 rounded-3xl lg:rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-black/20">
       
       <div className="text-center mb-8 flex flex-col items-center">
         <Image src="/logo-icon.png" alt="UCAHUB Icon" width={64} height={64} className="w-16 h-16 object-contain mb-4 shadow-sm rounded-xl" />

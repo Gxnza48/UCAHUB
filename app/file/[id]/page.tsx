@@ -3,20 +3,36 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ZoomIn, Printer, Maximize, FileText, File, Download } from 'lucide-react';
 import { PdfPreview } from '@/components/PdfPreview';
+import { DownloadButton } from '@/components/DownloadButton';
+import { RatingSystem } from '@/components/RatingSystem';
 
 export default async function FileDetail(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
   
   const { data: file, error } = await supabase
     .from('files')
-    .select('*, users(username)')
+    .select('*, users(username, id)')
     .eq('id', params.id)
     .single();
 
   if (error || !file) {
     notFound();
   }
+
+  // Fetch ratings for this file
+  const { data: ratingsData } = await supabase
+    .from('ratings')
+    .select('rating, user_id')
+    .eq('file_id', file.id);
+
+  const totalRatings = ratingsData?.length || 0;
+  const averageRating = totalRatings > 0 
+    ? ratingsData!.reduce((acc: number, curr: any) => acc + curr.rating, 0) / totalRatings 
+    : 0;
+  
+  const userRating = ratingsData?.find((r: any) => r.user_id === user?.id)?.rating || 0;
 
   // Use download attribute in native anchor if same-origin, or target="_blank"
   return (
@@ -75,10 +91,17 @@ export default async function FileDetail(props: { params: Promise<{ id: string }
             <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{file.description}</p>
             
             <div className="space-y-4">
-              <a href={file.file_url} target="_blank" rel="noopener noreferrer" download className="w-full bg-[#1d3b6f] dark:bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 active:scale-[0.98] transition-all shadow-md">
-                <Download className="w-6 h-6" />
-                Descargar ahora
-              </a>
+              <DownloadButton fileId={file.id} fileUrl={file.file_url} />
+            </div>
+
+            <div className="pt-2">
+              <RatingSystem 
+                fileId={file.id} 
+                userId={user?.id} 
+                initialRating={userRating}
+                averageRating={averageRating}
+                totalRatings={totalRatings}
+              />
             </div>
 
             <div className="pt-6 border-t border-slate-200 dark:border-slate-700">

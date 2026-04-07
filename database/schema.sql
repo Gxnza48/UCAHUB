@@ -21,9 +21,23 @@ CREATE POLICY "Users can update own profile." ON public.users FOR UPDATE USING (
 -- 2. CREATE THE MISSING TRIGGER TO INSERT USERS UPON REGISTRATION!
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS trigger AS $$
+DECLARE
+  base_username TEXT;
+  final_username TEXT;
+  counter INTEGER := 0;
 BEGIN
+  -- Extraemos la parte anterior al @ del email
+  base_username := split_part(new.email, '@', 1);
+  final_username := base_username;
+  
+  -- Si el nombre de usuario ya existe, añadimos un número al final
+  WHILE EXISTS (SELECT 1 FROM public.users WHERE username = final_username) LOOP
+    counter := counter + 1;
+    final_username := base_username || counter::text;
+  END LOOP;
+
   INSERT INTO public.users (id, email, username)
-  VALUES (new.id, new.email, split_part(new.email, '@', 1));
+  VALUES (new.id, new.email, final_username);
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -50,6 +64,7 @@ CREATE TABLE IF NOT EXISTS public.files (
   year INTEGER,
   subject TEXT,
   user_id UUID REFERENCES public.users(id) NOT NULL,
+  download_count INTEGER DEFAULT 0 NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
@@ -75,3 +90,32 @@ DROP POLICY IF EXISTS "Give public access to files" ON storage.objects;
 CREATE POLICY "Give public access to files" ON storage.objects FOR SELECT USING (bucket_id = 'files');
 DROP POLICY IF EXISTS "Give authenticated users upload access" ON storage.objects;
 CREATE POLICY "Give authenticated users upload access" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'files' AND auth.role() = 'authenticated');
+
+-- 6. RPC for safe download counting
+CREATE OR REPLACE FUNCTION public.increment_download_count(file_id UUID)
+RETURNS void AS $$
+BEGIN
+  UPDATE public.files
+  SET download_count = download_count + 1
+  WHERE id = file_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- 7. Ratings system
+CREATE TABLE IF NOT EXISTS public.ratings (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  file_id UUID REFERENCES public.files(id) ON DELETE CASCADE NOT NULL,
+  user_id UUID REFERENCES public.users(id) ON DELETE CASCADE NOT NULL,
+  rating INTEGER CHECK (rating >= 1 AND rating <= 5) NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  UNIQUE(file_id, user_id)
+);
+
+-- RLS for ratings
+ALTER TABLE public.ratings ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Ratings are viewable by everyone." ON public.ratings;
+CREATE POLICY "Ratings are viewable by everyone." ON public.ratings FOR SELECT USING ( true );
+DROP POLICY IF EXISTS "Users can insert own ratings." ON public.ratings;
+CREATE POLICY "Users can insert own ratings." ON public.ratings FOR INSERT WITH CHECK ( auth.role() = 'authenticated' AND auth.uid() = user_id );
+DROP POLICY IF EXISTS "Users can update own ratings." ON public.ratings;
+CREATE POLICY "Users can update own ratings." ON public.ratings FOR UPDATE USING ( auth.uid() = user_id );

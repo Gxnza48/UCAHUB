@@ -15,6 +15,9 @@ export default async function ProfilePage() {
     .eq('user_id', user.id)
     .order('created_at', { ascending: false });
 
+  const totalDownloads = userFiles?.reduce((acc, file) => acc + (file.download_count || 0), 0) || 0;
+  const reputation = ((userFiles?.length || 0) * 10) + (totalDownloads * 2);
+
   const { data: dbUser } = await supabase
     .from('users')
     .select('username')
@@ -74,20 +77,20 @@ export default async function ProfilePage() {
           </div>
         </div>
         
-        <div className="bg-white dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between opacity-60">
+        <div className="bg-white dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between group hover:border-blue-400/50 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <span className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">Descargas</span>
-            <div className="w-10 h-10 bg-slate-100 dark:bg-slate-700/50 rounded-full flex items-center justify-center text-slate-400">
+            <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center text-blue-500">
               <Upload className="w-5 h-5" />
             </div>
           </div>
           <div>
-            <span className="text-5xl font-black text-slate-300 dark:text-slate-600">-</span>
-            <p className="text-sm text-slate-400 mt-2 font-medium">Próximamente</p>
+            <span className="text-5xl font-black text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors">{totalDownloads}</span>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">Veces descargado</p>
           </div>
         </div>
         
-        <div className="bg-white dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between opacity-60">
+        <div className="bg-white dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between group hover:border-amber-400/50 transition-colors">
           <div className="flex justify-between items-start mb-4">
             <span className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">Reputación</span>
             <div className="w-10 h-10 bg-amber-50 dark:bg-amber-900/20 rounded-full flex items-center justify-center text-amber-500">
@@ -95,8 +98,8 @@ export default async function ProfilePage() {
             </div>
           </div>
           <div>
-            <span className="text-5xl font-black text-slate-300 dark:text-slate-600">-</span>
-            <p className="text-sm text-slate-400 mt-2 font-medium">Próximamente</p>
+            <span className="text-5xl font-black text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">{reputation}</span>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">Puntos académicos</p>
           </div>
         </div>
       </section>
@@ -121,6 +124,10 @@ export default async function ProfilePage() {
                     </Link>
                     <div className="flex items-center gap-3">
                       <span className="text-xs font-semibold px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded-md text-slate-600 dark:text-slate-300">{file.type}</span>
+                      <div className="flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500 font-medium">
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>{file.download_count || 0} descargas</span>
+                      </div>
                       <span className="text-xs text-slate-400 dark:text-slate-500">{new Date(file.created_at).toLocaleDateString('es-AR', { year: 'numeric', month: 'long', day: 'numeric'})}</span>
                     </div>
                   </div>

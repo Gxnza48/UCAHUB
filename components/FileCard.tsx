@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { User, FileText } from 'lucide-react';
+import { User, FileText, Download } from 'lucide-react';
 import { PdfPreview } from '@/components/PdfPreview';
 
 export default function FileCard({ file }: { file: any }) {
@@ -43,6 +43,10 @@ export default function FileCard({ file }: { file: any }) {
           <div className="flex items-center gap-1.5">
             <User className="w-4 h-4 text-slate-400" />
             <span className="truncate max-w-[120px]">{file.users?.username || 'Estudiante'}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-slate-400">
+            <Download className="w-3 h-3" />
+            <span className="text-[11px] font-bold">{file.download_count || 0}</span>
           </div>
           <div className="ml-auto text-[11px] font-semibold text-slate-400 dark:text-slate-500">{new Date(file.created_at).toLocaleDateString('es-AR', { month: 'short', day: 'numeric' })}</div>
         </div>

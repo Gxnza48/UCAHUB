@@ -12,12 +12,12 @@ export default async function AuthPage() {
   }
 
   return (
-    <div className="flex-grow flex items-center justify-center p-6 relative overflow-hidden py-24">
+    <div className="flex-grow flex items-center justify-center p-4 lg:p-6 relative overflow-hidden py-12 lg:py-24">
       {/* Background Elements for Academia Fluida Aesthetic */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-container/5 rounded-full blur-[120px]"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-secondary-container/10 rounded-full blur-[100px]"></div>
 
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm relative z-10">
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-transparent lg:bg-surface-container-lowest rounded-xl overflow-hidden lg:shadow-sm relative z-10">
         
         {/* Left Side: Visual Narrative (Split Layout) */}
         <div className="hidden lg:block relative overflow-hidden group">
@@ -40,7 +40,7 @@ export default async function AuthPage() {
         </div>
 
         {/* Right Side: Auth Form */}
-        <div className="p-8 md:p-16 flex flex-col justify-center">
+        <div className="p-4 md:p-16 flex flex-col justify-center">
           <div className="max-w-md mx-auto w-full">
             <div className="mb-10">
               <h2 className="font-headline text-3xl font-bold text-primary mb-2">Bienvenido</h2>
