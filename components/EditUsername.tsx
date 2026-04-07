@@ -29,10 +29,30 @@ export function EditUsername({ initialUsername, userId }: { initialUsername: str
     setError('');
 
     try {
+      // Check 24 hour limit first
+      const { data: dbUser } = await supabase.from('users').select('last_username_update, email').eq('id', userId).single();
+      
+      if (dbUser?.last_username_update) {
+        const lastUpdate = new Date(dbUser.last_username_update);
+        const now = new Date();
+        const hoursPassed = (now.getTime() - lastUpdate.getTime()) / (1000 * 60 * 60);
+        
+        if (hoursPassed < 24) {
+          setError(`Debes esperar 24 horas para volver a cambiar tu nombre. (Faltan ${Math.ceil(24 - hoursPassed)} hrs)`);
+          setLoading(false);
+          return;
+        }
+      }
+
+      // We use Upsert just in case the row somehow still doesn't exist to prevent 0-row silent failures
       const { error: updateError } = await supabase
         .from('users')
-        .update({ username })
-        .eq('id', userId);
+        .upsert({ 
+          id: userId, 
+          username, 
+          email: dbUser?.email || 'unknown@uca.edu.ar',
+          last_username_update: new Date().toISOString() 
+        }, { onConflict: 'id' });
 
       if (updateError) {
         if (updateError.code === '23505') {
