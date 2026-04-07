@@ -2,6 +2,8 @@ import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
 import { Calendar, FileText, Upload, Star } from 'lucide-react';
 import { EditUsername } from '@/components/EditUsername';
+import { EditFileModal } from '@/components/EditFileModal';
+import { DeleteFileButton } from '@/components/DeleteFileButton';
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -133,7 +135,9 @@ export default async function ProfilePage() {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4 w-full sm:w-auto justify-end mt-2 sm:mt-0">
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-end mt-2 sm:mt-0">
+                   <EditFileModal file={file} />
+                   <DeleteFileButton fileId={file.id} fileUrl={file.file_url} fileName={file.title} />
                    <Link href={`/file/${file.id}`} className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#1d3b6f] hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all shadow-sm active:scale-95">
                      Inspeccionar
                    </Link>

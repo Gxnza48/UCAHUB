@@ -1,10 +1,20 @@
 'use client'
 
-import React, { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Loader2, ExternalLink, FileText } from 'lucide-react';
 
 export function PdfPreview({ fileUrl }: { fileUrl: string }) {
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div className="w-full h-full relative bg-slate-50 dark:bg-[#0f172a]">
@@ -35,12 +45,32 @@ export function PdfPreview({ fileUrl }: { fileUrl: string }) {
         </div>
       )}
       
-      <iframe
-        src={`${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-        className={`w-full h-full border-0 transition-opacity duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
-        onLoad={() => setLoading(false)}
-        title="Vista previa del PDF interactiva"
-      />
+      {isMobile ? (
+        <div className="flex flex-col items-center justify-center p-8 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="w-20 h-20 bg-[#1d3b6f]/10 dark:bg-blue-500/10 rounded-2xl flex items-center justify-center text-[#1d3b6f] dark:text-blue-400 mb-6 border border-[#1d3b6f]/20 dark:border-blue-500/20">
+            <FileText className="w-10 h-10" />
+          </div>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">Vista previa optimizada</h3>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mb-8 max-w-[240px]">Para una mejor experiencia en móvil, abre el documento en una pestaña nueva.</p>
+          <a 
+            href={fileUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-[#1d3b6f] dark:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-xl active:scale-95 transition-all w-full justify-center"
+            onClick={() => setLoading(false)}
+          >
+            <ExternalLink className="w-5 h-5" />
+            Abrir PDF completo
+          </a>
+        </div>
+      ) : (
+        <iframe
+          src={`${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+          className={`w-full h-full border-0 transition-opacity duration-700 ${loading ? 'opacity-0' : 'opacity-100'}`}
+          onLoad={() => setLoading(false)}
+          title="Vista previa del PDF interactiva"
+        />
+      )}
     </div>
   );
 }
