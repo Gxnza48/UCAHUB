@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { User } from 'lucide-react';
+import { User, FileText } from 'lucide-react';
+import { PdfPreview } from '@/components/PdfPreview';
 
 export default function FileCard({ file }: { file: any }) {
   const typeLabel = file.type || 'Documento';
@@ -16,8 +17,20 @@ export default function FileCard({ file }: { file: any }) {
   return (
     <div className="group bg-white dark:bg-slate-800/80 rounded-2xl p-2 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary-container/10 dark:hover:shadow-blue-900/20 hover:-translate-y-1 flex flex-col h-full ring-1 ring-slate-200 dark:ring-slate-700/50">
       <Link href={`/file/${file.id}`} className="block relative h-48 w-full overflow-hidden rounded-xl mb-4 shrink-0 bg-slate-100 dark:bg-slate-900">
-        <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src={coverImage} alt={file.title} />
-        <div className="absolute top-4 right-4 bg-primary-container/90 dark:bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm border border-white/10">
+        
+        {/* We place the interactive PdfPreview underneath a transparent shield so the Link click works */}
+        <div className="w-full h-full pointer-events-none transition-transform duration-500 group-hover:scale-105 origin-top">
+          {file.file_url ? (
+             <PdfPreview fileUrl={file.file_url} />
+          ) : (
+             <img className="w-full h-full object-cover" src={coverImage} alt={file.title} />
+          )}
+        </div>
+        
+        {/* Transparent Shield to ensure Link captures clicks and not the iframe */}
+        <div className="absolute inset-0 z-10 bg-transparent"></div>
+
+        <div className="absolute top-4 right-4 z-20 bg-primary-container/90 dark:bg-blue-600/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm border border-white/10">
             {typeLabel}
         </div>
       </Link>
