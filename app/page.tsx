@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { CloudUpload, Search, Download, FileText, File } from 'lucide-react';
-import { HeroParticles } from '@/components/HeroParticles';
+import DotGrid from '@/components/DotGrid';
 
 export default async function Home() {
   const supabase = await createClient();
@@ -14,7 +14,19 @@ export default async function Home() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 bg-slate-50 dark:bg-[#0f172a] transition-colors duration-300">
-        <HeroParticles />
+        <div className="absolute inset-0 z-0">
+          <DotGrid
+            dotSize={5}
+            gap={15}
+            baseColor="#271E37"
+            activeColor="#5227FF"
+            proximity={120}
+            shockRadius={250}
+            shockStrength={5}
+            resistance={750}
+            returnDuration={1.5}
+          />
+        </div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] dark:opacity-[0.05]"></div>
         <div className="max-w-5xl mx-auto text-center z-10 pt-20">
           <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-primary-container/10 dark:bg-blue-500/10 text-primary-container dark:text-blue-400 font-bold text-sm tracking-widest uppercase border border-primary-container/20 dark:border-blue-500/20 shadow-sm">El Hub de Conocimiento</span>
