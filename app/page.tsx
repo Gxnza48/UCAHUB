@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 bg-slate-50 dark:bg-[#0f172a] transition-colors duration-300">
-        <div className="absolute inset-0 z-0">
+        <div className="hidden dark:block absolute inset-0 z-0">
           <DotGrid
             dotSize={5}
             gap={15}
