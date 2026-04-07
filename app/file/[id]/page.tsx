@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ZoomIn, Printer, Maximize, FileText, File, Download } from 'lucide-react';
+import { PdfPreview } from '@/components/PdfPreview';
 
 export default async function FileDetail(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -46,13 +47,12 @@ export default async function FileDetail(props: { params: Promise<{ id: string }
                   <Maximize className="w-4 h-4 opacity-50" />
                 </div>
               </div>
-              <div className="flex-1 p-10 space-y-6 overflow-hidden flex flex-col items-center justify-center opacity-30">
-                 <FileText className="w-24 h-24 text-outline-variant mb-4" />
-                 <p className="font-bold text-lg text-outline-variant text-center">Vista previa simplificada para MVP.<br/>Descarga el archivo para verlo completo.</p>
+              <div className="flex-1 relative overflow-hidden bg-slate-100 dark:bg-slate-900 rounded-b-lg">
+                 <PdfPreview fileUrl={file.file_url} />
               </div>
             </div>
             
-            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 flex items-center justify-center">
               <a href={file.file_url} target="_blank" rel="noopener noreferrer" className="bg-white/90 backdrop-blur px-6 py-3 rounded-full flex items-center gap-3 shadow-lg text-primary font-semibold hover:scale-105 transition-transform">
                 <ZoomIn className="w-5 h-5" />
                 Ver Completo
