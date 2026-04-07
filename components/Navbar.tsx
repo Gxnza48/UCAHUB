@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import { Compass, PlusCircle, User, Bell, LogOut, Menu } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { NotificationsMenu } from './NotificationsMenu';
 
 export default function Navbar({ user }: { user: any }) {
   const pathname = usePathname();
@@ -49,9 +50,7 @@ export default function Navbar({ user }: { user: any }) {
           
           {user ? (
             <div className="hidden md:flex items-center gap-2">
-              <button className="text-slate-500 dark:text-slate-400 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all active:scale-95 duration-200" title="Notificaciones">
-                <Bell className="w-5 h-5" />
-              </button>
+              <NotificationsMenu />
               <Link href="/profile" className="text-primary dark:text-blue-400 p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all active:scale-95 duration-200" title="Perfil">
                 <User className="w-5 h-5" />
               </Link>

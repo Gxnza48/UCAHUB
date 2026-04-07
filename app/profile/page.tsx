@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
 import Link from 'next/link';
 import { Calendar, FileText, Upload, Star } from 'lucide-react';
+import { EditUsername } from '@/components/EditUsername';
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -13,6 +14,14 @@ export default async function ProfilePage() {
     .select('*')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false });
+
+  const { data: dbUser } = await supabase
+    .from('users')
+    .select('username')
+    .eq('id', user.id)
+    .single();
+
+  const username = dbUser?.username || user.email?.split('@')[0] || '';
 
   return (
     <div className="pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto min-h-screen">
@@ -33,10 +42,8 @@ export default async function ProfilePage() {
           
           <div className="flex-1 pb-4 text-center md:text-left">
             <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-3">
-              <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white line-clamp-1 truncate max-w-xl">
-                {user.email?.split('@')[0]}
-              </h1>
-              <span className="bg-primary-container/10 dark:bg-blue-500/10 text-primary-container dark:text-blue-400 border border-primary-container/20 dark:border-blue-500/20 text-xs font-bold px-3 py-1 rounded-full w-fit mx-auto md:mx-0 tracking-widest uppercase">
+              <EditUsername initialUsername={username} userId={user.id} />
+              <span className="bg-primary-container/10 dark:bg-blue-500/10 text-primary-container dark:text-blue-400 border border-primary-container/20 dark:border-blue-500/20 text-xs font-bold px-3 py-1 rounded-full w-fit mx-auto md:mx-0 tracking-widest uppercase mt-1 md:mt-0">
                 Miembro Académico
               </span>
             </div>

@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-primary-fixed-dim: #adc6ff;
   --color-on-surface: #191c1e;
