@@ -1,0 +1,213 @@
+
+> tempapp@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.2.2 (Turbopack)
+
+ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 12 errors:
+./app/auth/page.tsx:2:1
+Module not found: Can't resolve '@/components/AuthForm'
+  1 | import React from 'react';
+> 2 | import AuthForm from '@/components/AuthForm';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { createClient } from '@/utils/supabase/server';
+  4 | import { redirect } from 'next/navigation';
+  5 |
+
+Import map: aliased to relative './src/components/AuthForm' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/hub/page.tsx:2:1
+Module not found: Can't resolve '@/components/FileCard'
+  1 | import { createClient } from '@/utils/supabase/server';
+> 2 | import FileCard from '@/components/FileCard';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import Link from 'next/link';
+  4 |
+  5 | export default async function HubPage(props: { searchParams: Promise<{ q?: string, carrera?...
+
+Import map: aliased to relative './src/components/FileCard' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/layout.tsx:4:1
+Module not found: Can't resolve '@/components/Footer'
+  2 | import "./globals.css";
+  3 | import Navbar from "@/components/Navbar";
+> 4 | import Footer from "@/components/Footer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import type { Metadata } from "next";
+  6 |
+  7 | export const metadata: Metadata = {
+
+Import map: aliased to relative './src/components/Footer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/layout.tsx:3:1
+Module not found: Can't resolve '@/components/Navbar'
+  1 | import { createClient } from "@/utils/supabase/server";
+  2 | import "./globals.css";
+> 3 | import Navbar from "@/components/Navbar";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import Footer from "@/components/Footer";
+  5 | import type { Metadata } from "next";
+  6 |
+
+Import map: aliased to relative './src/components/Navbar' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/upload/page.tsx:1:1
+Module not found: Can't resolve '@/components/UploadForm'
+> 1 | import UploadForm from '@/components/UploadForm';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function UploadPage() {
+  4 |   return (
+
+Import map: aliased to relative './src/components/UploadForm' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./middleware.ts:2:1
+Module not found: Can't resolve '@/utils/supabase/middleware'
+  1 | import { type NextRequest } from 'next/server'
+> 2 | import { updateSession } from '@/utils/supabase/middleware'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function middleware(request: NextRequest) {
+  5 |   return await updateSession(request)
+
+Import map: aliased to relative './src/utils/supabase/middleware' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/auth/page.tsx:3:1
+Module not found: Can't resolve '@/utils/supabase/server'
+  1 | import React from 'react';
+  2 | import AuthForm from '@/components/AuthForm';
+> 3 | import { createClient } from '@/utils/supabase/server';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { redirect } from 'next/navigation';
+  5 |
+  6 | export default async function AuthPage() {
+
+Import map: aliased to relative './src/utils/supabase/server' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/file/[id]/page.tsx:1:1
+Module not found: Can't resolve '@/utils/supabase/server'
+> 1 | import { createClient } from '@/utils/supabase/server';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import Link from 'next/link';
+  3 | import { notFound } from 'next/navigation';
+  4 |
+
+Import map: aliased to relative './src/utils/supabase/server' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/hub/page.tsx:1:1
+Module not found: Can't resolve '@/utils/supabase/server'
+> 1 | import { createClient } from '@/utils/supabase/server';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import FileCard from '@/components/FileCard';
+  3 | import Link from 'next/link';
+  4 |
+
+Import map: aliased to relative './src/utils/supabase/server' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/layout.tsx:1:1
+Module not found: Can't resolve '@/utils/supabase/server'
+> 1 | import { createClient } from "@/utils/supabase/server";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import "./globals.css";
+  3 | import Navbar from "@/components/Navbar";
+  4 | import Footer from "@/components/Footer";
+
+Import map: aliased to relative './src/utils/supabase/server' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/page.tsx:2:1
+Module not found: Can't resolve '@/utils/supabase/server'
+  1 | import Link from 'next/link';
+> 2 | import { createClient } from '@/utils/supabase/server';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { redirect } from 'next/navigation';
+  4 |
+  5 | export default async function Home() {
+
+Import map: aliased to relative './src/utils/supabase/server' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/profile/page.tsx:1:1
+Module not found: Can't resolve '@/utils/supabase/server'
+> 1 | import { createClient } from '@/utils/supabase/server';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import Link from 'next/link';
+  3 |
+  4 | export default async function ProfilePage() {
+
+Import map: aliased to relative './src/utils/supabase/server' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./app/auth/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/hub/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/layout.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/layout.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/upload/page.tsx:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./middleware.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/auth/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/file/[id]/page.tsx:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/hub/page.tsx:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/layout.tsx:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/profile/page.tsx:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
