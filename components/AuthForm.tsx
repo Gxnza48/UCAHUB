@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Mail, Lock, ArrowRight, Loader2 } from 'lucide-react';
 
 export default function AuthForm() {
@@ -50,7 +51,8 @@ export default function AuthForm() {
   return (
     <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-black/20">
       
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 flex flex-col items-center">
+        <Image src="/logo-icon.png" alt="UCAHUB Icon" width={64} height={64} className="w-16 h-16 object-contain mb-4 shadow-sm rounded-xl" />
         <h2 className="font-headline text-3xl font-black text-[#1d3b6f] dark:text-white tracking-tight mb-2">
            {isLogin ? 'Bienvenido a UCAHUB' : 'Crea tu Cuenta'}
         </h2>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import { Compass, PlusCircle, User, Bell, LogOut, Menu } from 'lucide-react';
@@ -24,11 +25,8 @@ export default function Navbar({ user }: { user: any }) {
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         
         <div className="flex items-center gap-8">
-          <Link href={user ? "/hub" : "/"} className="font-headline font-black text-2xl tracking-tighter text-[#1D3B6F] dark:text-white flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#1D3B6F] to-primary-container dark:from-blue-600 dark:to-blue-400 rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
-              <span className="text-white text-xs">UH</span>
-            </div>
-            UCAHUB
+          <Link href={user ? "/hub" : "/"} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <Image src="/logo-horizontal.png" alt="UCAHUB Logo" width={140} height={40} className="h-10 w-auto object-contain" />
           </Link>
           
           {user && (

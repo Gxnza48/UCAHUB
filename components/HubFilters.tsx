@@ -27,10 +27,15 @@ export default function HubFilters({ searchParams }: { searchParams: { q?: strin
           <GraduationCap className="w-5 h-5 text-primary-container dark:text-blue-400" />
           <select name="carrera" defaultValue={searchParams.carrera || ''} onChange={handleSelectChange} className="bg-transparent border-none focus:ring-0 text-sm font-bold text-slate-700 dark:text-slate-200 min-w-[140px] outline-none cursor-pointer appearance-none">
             <option value="" className="text-slate-900">Todas las Carreras</option>
-            <option value="Ingeniería Informática" className="text-slate-900">Ingeniería Informática</option>
+            <option value="Abogacía" className="text-slate-900">Abogacía</option>
+            <option value="Contador Público" className="text-slate-900">Contador Público</option>
             <option value="Administración de Empresas" className="text-slate-900">Administración de Empresas</option>
-            <option value="Psicología" className="text-slate-900">Psicología</option>
-            <option value="Derecho" className="text-slate-900">Derecho</option>
+            <option value="Marketing" className="text-slate-900">Marketing</option>
+            <option value="Recursos Humanos" className="text-slate-900">Recursos Humanos</option>
+            <option value="Ingeniería Industrial" className="text-slate-900">Ingeniería Industrial</option>
+            <option value="Ingeniería Química" className="text-slate-900">Ingeniería Química</option>
+            <option value="Comunicación Periodística" className="text-slate-900">Comunicación Periodística</option>
+            <option value="Ciencia de Datos" className="text-slate-900">Ciencia de Datos</option>
           </select>
         </div>
 

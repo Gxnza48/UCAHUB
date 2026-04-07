@@ -150,10 +150,15 @@ export default function UploadForm() {
                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3 px-1">Carrera</label>
                 <select required value={career} onChange={e => setCareer(e.target.value)} className="w-full bg-slate-50 dark:bg-slate-800/50 border-2 border-transparent focus:border-primary-container/20 dark:focus:border-blue-500/30 rounded-2xl p-4 focus:ring-4 focus:ring-primary-container/5 dark:focus:ring-blue-500/10 transition-all outline-none appearance-none font-medium cursor-pointer text-slate-900 dark:text-white">
                   <option disabled value="">Seleccionar carrera</option>
-                  <option value="Ingeniería Informática">Ingeniería Informática</option>
+                  <option value="Abogacía">Abogacía</option>
+                  <option value="Contador Público">Contador Público</option>
                   <option value="Administración de Empresas">Administración de Empresas</option>
-                  <option value="Psicología">Psicología</option>
-                  <option value="Derecho">Derecho</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Recursos Humanos">Recursos Humanos</option>
+                  <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                  <option value="Ingeniería Química">Ingeniería Química</option>
+                  <option value="Comunicación Periodística">Comunicación Periodística</option>
+                  <option value="Ciencia de Datos">Ciencia de Datos</option>
                 </select>
               </div>
               
