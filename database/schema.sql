@@ -55,17 +55,6 @@ CREATE TABLE IF NOT EXISTS public.files (
 
 -- Ensure old restriction is dropped if the table already existed
 ALTER TABLE public.files DROP CONSTRAINT IF EXISTS files_type_check;
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  description TEXT,
-  file_url TEXT NOT NULL,
-  type TEXT,
-  career TEXT,
-  year INTEGER,
-  subject TEXT,
-  user_id UUID REFERENCES public.users(id) NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
-);
 
 -- RLS for files
 ALTER TABLE public.files ENABLE ROW LEVEL SECURITY;
