@@ -142,6 +142,8 @@ const DotGrid: React.FC<DotGridProps> = ({
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const { x: px, y: py } = pointerRef.current;
+      const proxSq = proximity * proximity;
+      const radius = dotSize / 2;
 
       for (const dot of dotsRef.current) {
         const ox = dot.cx + dot.xOffset;
@@ -150,21 +152,20 @@ const DotGrid: React.FC<DotGridProps> = ({
         const dy = dot.cy - py;
         const dsq = dx * dx + dy * dy;
 
-        let style = baseColor;
         if (dsq <= proxSq) {
           const dist = Math.sqrt(dsq);
           const t = 1 - dist / proximity;
           const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * t);
           const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * t);
           const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * t);
-          style = `rgb(${r},${g},${b})`;
+          ctx.fillStyle = `rgb(${r},${g},${b})`;
+        } else {
+          ctx.fillStyle = baseColor;
         }
 
-        ctx.save();
-        ctx.translate(ox, oy);
-        ctx.fillStyle = style;
-        ctx.fill(circlePath);
-        ctx.restore();
+        ctx.beginPath();
+        ctx.arc(ox, oy, radius, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       rafId = requestAnimationFrame(draw);
@@ -198,13 +199,15 @@ const DotGrid: React.FC<DotGridProps> = ({
       const dy = e.clientY - pr.lastY;
       let vx = (dx / dt) * 1000;
       let vy = (dy / dt) * 1000;
-      let speed = Math.hypot(vx, vy);
+      let speed = Math.sqrt(vx * vx + vy * vy);
+      
       if (speed > maxSpeed) {
         const scale = maxSpeed / speed;
         vx *= scale;
         vy *= scale;
         speed = maxSpeed;
       }
+      
       pr.lastTime = now;
       pr.lastX = e.clientX;
       pr.lastY = e.clientY;
@@ -218,25 +221,32 @@ const DotGrid: React.FC<DotGridProps> = ({
       pr.x = e.clientX - rect.left;
       pr.y = e.clientY - rect.top;
 
+      const proxSq = proximity * proximity;
+
       for (const dot of dotsRef.current) {
-        const dist = Math.hypot(dot.cx - pr.x, dot.cy - pr.y);
-        if (speed > speedTrigger && dist < proximity && !dot._inertiaApplied) {
+        const dx = dot.cx - pr.x;
+        const dy = dot.cy - pr.y;
+        const distSq = dx * dx + dy * dy;
+        
+        if (speed > speedTrigger && distSq < proxSq && !dot._inertiaApplied) {
           dot._inertiaApplied = true;
           gsap.killTweensOf(dot);
-          const pushX = (dot.cx - pr.x) * (speed / 500);
-          const pushY = (dot.cy - pr.y) * (speed / 500);
+          
+          // Calculate push vector
+          const pushX = (dx) * (speed / 1000) * 0.5;
+          const pushY = (dy) * (speed / 1000) * 0.5;
           
           gsap.to(dot, {
             xOffset: pushX,
             yOffset: pushY,
-            duration: 0.2,
+            duration: 0.15,
             ease: "power2.out",
             onComplete: () => {
               gsap.to(dot, {
                 xOffset: 0,
                 yOffset: 0,
                 duration: returnDuration,
-                ease: 'elastic.out(1,0.75)',
+                ease: 'elastic.out(1, 0.6)',
                 onComplete: () => {
                   dot._inertiaApplied = false;
                 }
@@ -253,26 +263,32 @@ const DotGrid: React.FC<DotGridProps> = ({
       const rect = canvas.getBoundingClientRect();
       const cx = e.clientX - rect.left;
       const cy = e.clientY - rect.top;
+      const shockSq = shockRadius * shockRadius;
+
       for (const dot of dotsRef.current) {
-        const dist = Math.hypot(dot.cx - cx, dot.cy - cy);
-        if (dist < shockRadius && !dot._inertiaApplied) {
+        const dx = dot.cx - cx;
+        const dy = dot.cy - cy;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < shockSq && !dot._inertiaApplied) {
           dot._inertiaApplied = true;
           gsap.killTweensOf(dot);
+          const dist = Math.sqrt(distSq);
           const falloff = Math.max(0, 1 - dist / shockRadius);
-          const pushX = (dot.cx - cx) * shockStrength * falloff;
-          const pushY = (dot.cy - cy) * shockStrength * falloff;
+          const pushX = (dx) * shockStrength * falloff;
+          const pushY = (dy) * shockStrength * falloff;
 
           gsap.to(dot, {
             xOffset: pushX,
             yOffset: pushY,
             duration: 0.1,
-            ease: "power1.out",
+            ease: "expo.out",
             onComplete: () => {
               gsap.to(dot, {
                 xOffset: 0,
                 yOffset: 0,
                 duration: returnDuration,
-                ease: 'elastic.out(1,0.75)',
+                ease: 'elastic.out(1, 0.5)',
                 onComplete: () => {
                   dot._inertiaApplied = false;
                 }
@@ -283,7 +299,8 @@ const DotGrid: React.FC<DotGridProps> = ({
       }
     };
 
-    const throttledMove = throttle(onMove, 50);
+    // Use a lighter throttle for smoother updates (10ms is ~100fps, effectively native)
+    const throttledMove = throttle(onMove, 10);
     window.addEventListener('mousemove', throttledMove, { passive: true });
     window.addEventListener('click', onClick);
 
