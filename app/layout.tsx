@@ -19,7 +19,7 @@ export default async function RootLayout({
   const { data: { user } } = await supabase.auth.getUser();
 
   return (
-    <html lang="es" suppressHydrationWarning className="scroll-smooth">
+    <html lang="es" suppressHydrationWarning className="scroll-smooth" style={{ scrollBehavior: 'smooth' }} data-scroll-behavior="smooth">
       <body suppressHydrationWarning className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white flex flex-col min-h-screen transition-colors duration-300 dark:bg-[#0f172a] dark:text-slate-200">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar user={user} />
