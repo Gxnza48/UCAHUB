@@ -94,7 +94,11 @@ export default function LandingContent({ user }: { user: any }) {
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(79,70,229,0.08)_0%,_transparent_50%)]"></div>
           <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
           <div className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-cta/5 rounded-full blur-[100px]"></div>
-          
+          <Particles 
+            count={100}
+            color="#4F46E5"
+            opacity={0.4}
+          />
         </div>
 
         <div className="max-w-6xl mx-auto text-center z-10 hero-content mt-12">
