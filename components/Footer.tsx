@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Logo } from './Logo';
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
         <div className="flex flex-col items-center md:items-start gap-4">
           <Link href="/" className="hover:opacity-80 transition-opacity">
-            <span className="font-headline font-bold text-3xl tracking-tight text-primary">UCA<span className="text-cta">HUB</span></span>
+            <Logo />
           </Link>
           <p className="text-slate-600 dark:text-slate-400 text-sm font-body max-w-xs text-center md:text-left leading-relaxed">
             El ecosistema de recursos compartidos para la comunidad de la Universidad Católica Argentina.

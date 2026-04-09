@@ -8,6 +8,7 @@ import { createClient } from '@/utils/supabase/client';
 import { Compass, PlusCircle, User, Bell, LogOut, Menu } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { NotificationsMenu } from './NotificationsMenu';
+import { Logo } from './Logo';
 
 export default function Navbar({ user }: { user: any }) {
   const pathname = usePathname();
@@ -26,8 +27,8 @@ export default function Navbar({ user }: { user: any }) {
       <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6 bg-white/70 dark:bg-black/40 backdrop-blur-3xl border border-white/20 dark:border-white/10 shadow-xl dark:shadow-none rounded-2xl transition-all duration-300">
         
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="font-headline font-bold text-2xl tracking-tight text-primary">UCA<span className="text-cta">HUB</span></span>
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <Logo />
           </Link>
           
           {user && (

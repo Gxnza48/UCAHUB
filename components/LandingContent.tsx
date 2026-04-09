@@ -85,17 +85,7 @@ export default function LandingContent({ user }: { user: any }) {
           <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
           <div className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-cta/5 rounded-full blur-[100px]"></div>
           
-          <Particles count={60} color="#4F46E5" opacity={0.4} />
-          
-          <div className="hidden dark:block opacity-30">
-            <DotGrid
-              dotSize={2}
-              gap={30}
-              baseColor="#4F46E5"
-              activeColor="#F59E0B"
-              proximity={120}
-            />
-          </div>
+/* Removed background effects for cleaner look */
         </div>
 
         <div className="max-w-6xl mx-auto text-center z-10 hero-content mt-12">
@@ -126,14 +116,6 @@ export default function LandingContent({ user }: { user: any }) {
               Ver Ecosistema
             </Link>
           </div>
-        </div>
-        {/* Refined Multi-layered Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 translate-y-[1px] z-20">
-          <svg className="relative block w-[calc(110%+1.3px)] h-[120px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5,73.84-4.36,147.54,16.88,218.2,35.26,69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor" className="text-primary/20"></path>
-            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.51,22.43-10.89,44.78-22.12,66.6-23.74,5.07-.38,10.15-.47,15.22-.27V0Z" opacity=".5" fill="currentColor" className="text-secondary/10"></path>
-            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor" className="text-background"></path>
-          </svg>
         </div>
       </section>
 
@@ -180,7 +162,7 @@ export default function LandingContent({ user }: { user: any }) {
                     <CloudUpload className="w-6 h-6" />
                   </div>
                   <h3 className="font-headline text-3xl font-bold mb-4">Carga Inteligente</h3>
-                  <p className="text-slate-500 text-lg leading-relaxed">
+                  <p className="text-slate-800 dark:text-slate-100 text-lg font-medium leading-relaxed">
                     Sube tus documentos en segundos. Nuestro sistema organiza automáticamente tus archivos por carrera y materia para que otros los encuentren fácilmente.
                   </p>
                 </div>
@@ -199,30 +181,30 @@ export default function LandingContent({ user }: { user: any }) {
                     <Search className="w-6 h-6" />
                   </div>
                   <h3 className="font-headline text-3xl font-bold mb-4 text-white">Filtros de Precisión</h3>
-                  <p className="text-slate-400 text-lg font-body leading-relaxed">
+                  <p className="text-slate-100 text-lg font-body font-medium leading-relaxed">
                     Localiza el examen del año pasado o los apuntes de ese profesor específico con nuestra búsqueda semántica avanzada.
                   </p>
                </div>
             </div>
 
-            <div className="feature-card card-premium group">
+            <div className="feature-card card-premium group bg-white dark:bg-black/80">
                <div className="inline-block p-3 bg-cta/10 rounded-2xl text-cta mb-6">
                   <Star className="w-6 h-6" />
                </div>
-               <h3 className="font-headline text-2xl font-bold mb-4 text-text dark:text-white">Sistema de Logros</h3>
-               <p className="text-slate-600 dark:text-slate-300 font-body">
+               <h3 className="font-headline text-2xl font-bold mb-4 text-slate-800 dark:text-white">Sistema de Logros</h3>
+               <p className="text-slate-600 dark:text-slate-200 font-body font-medium">
                   Gana reputación por cada aporte que realices. Conviértete en un referente académico en el Hall de la Fama.
                </p>
             </div>
 
-            <div className="feature-card card-premium md:col-span-2 overflow-hidden relative group">
+            <div className="feature-card card-premium md:col-span-2 overflow-hidden relative group bg-white dark:bg-black/80">
                <div className="flex items-center justify-between">
                   <div className="max-w-md relative z-10">
                     <div className="inline-block p-3 bg-secondary/10 rounded-2xl text-secondary mb-6">
                       <Download className="w-6 h-6" />
                     </div>
-                    <h3 className="font-headline text-3xl font-bold mb-4 text-text dark:text-white">Acceso Instantáneo</h3>
-                    <p className="text-slate-600 dark:text-slate-300 text-lg font-body">
+                    <h3 className="font-headline text-3xl font-bold mb-4 text-slate-800 dark:text-white">Acceso Instantáneo</h3>
+                    <p className="text-slate-600 dark:text-slate-200 text-lg font-body font-medium leading-relaxed">
                        Previsualiza cualquier PDF directamente en el navegador con nuestra tecnología de renderizado fluido optimizada para móviles.
                     </p>
                   </div>
@@ -237,8 +219,8 @@ export default function LandingContent({ user }: { user: any }) {
       <section className="reveal-section py-40 px-6 relative bg-gradient-to-b from-transparent to-primary/[0.03]">
         <div className="max-w-4xl mx-auto text-center">
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-cta mx-auto mb-12 rounded-full"></div>
-            <h2 className="font-headline text-5xl md:text-7xl font-bold mb-10 tracking-tight">¿Listo para escribir <br/> <span className="text-cta">tu propia historia?</span></h2>
-            <p className="text-xl text-slate-500 mb-16 font-body italic">
+            <h2 className="font-headline text-5xl md:text-7xl font-bold mb-10 tracking-tight text-slate-900 dark:text-white">¿Listo para escribir <br/> <span className="text-cta">tu propia historia?</span></h2>
+            <p className="text-xl text-slate-700 dark:text-slate-300 mb-16 font-body font-medium italic">
               "La red de colaboración más grande de la UCA te espera. Comienza a compartir y eleva tu potencial académico."
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
