@@ -18,9 +18,19 @@ export default function LandingContent({ user }: { user: any }) {
     // Refresh ScrollTrigger when images load or after a short delay
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 1000);
+    }, 500);
+    
+    // Additional refresh on window interaction to catch late layout shifts
+    const handleScroll = () => {
+      ScrollTrigger.refresh();
+      window.removeEventListener('scroll', handleScroll);
+    };
+    window.addEventListener('scroll', handleScroll);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -40,7 +50,7 @@ export default function LandingContent({ user }: { user: any }) {
         gsap.from(section, {
           scrollTrigger: {
             trigger: section,
-            start: 'top 85%',
+            start: 'top 95%',
             toggleActions: 'play none none reverse',
           },
           y: 40,
@@ -54,7 +64,7 @@ export default function LandingContent({ user }: { user: any }) {
       gsap.from('.feature-card', {
         scrollTrigger: {
           trigger: '.features-grid',
-          start: 'top 85%',
+          start: 'top 95%',
         },
         y: 30,
         opacity: 0,
@@ -85,7 +95,6 @@ export default function LandingContent({ user }: { user: any }) {
           <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
           <div className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-cta/5 rounded-full blur-[100px]"></div>
           
-/* Removed background effects for cleaner look */
         </div>
 
         <div className="max-w-6xl mx-auto text-center z-10 hero-content mt-12">
