@@ -127,6 +127,12 @@ export default function LandingContent({ user }: { user: any }) {
             </Link>
           </div>
         </div>
+        {/* Wave Divider */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 translate-y-[1px] z-20">
+          <svg className="relative block w-[calc(100%+1.3px)] h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C0,0,10.18,20,32,32,45.24,39.33,96.67,51.33,121.19,53,165.41,56,263.39,67.23,321.39,56.44Z" className="fill-background"></path>
+          </svg>
+        </div>
       </section>
 
       {/* Social Proof / Stats Reveal */}
@@ -152,7 +158,7 @@ export default function LandingContent({ user }: { user: any }) {
       </section>
 
       {/* Features Storytelling */}
-      <section id="discover" className="py-32 px-6 relative bg-background">
+      <section id="discover" className="py-32 px-6 relative bg-background border-none">
         <div className="max-w-7xl mx-auto min-h-screen">
           <div className="reveal-section flex flex-col items-center text-center mb-24 relative">
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/20 blur-[100px] pointer-events-none rounded-full"></div>
@@ -201,8 +207,8 @@ export default function LandingContent({ user }: { user: any }) {
                <div className="inline-block p-3 bg-cta/10 rounded-2xl text-cta mb-6">
                   <Star className="w-6 h-6" />
                </div>
-               <h3 className="font-headline text-2xl font-bold mb-4">Sistema de Logros</h3>
-               <p className="text-slate-500 font-body">
+               <h3 className="font-headline text-2xl font-bold mb-4 text-text dark:text-white">Sistema de Logros</h3>
+               <p className="text-slate-600 dark:text-slate-300 font-body">
                   Gana reputación por cada aporte que realices. Conviértete en un referente académico en el Hall de la Fama.
                </p>
             </div>
@@ -213,12 +219,12 @@ export default function LandingContent({ user }: { user: any }) {
                     <div className="inline-block p-3 bg-secondary/10 rounded-2xl text-secondary mb-6">
                       <Download className="w-6 h-6" />
                     </div>
-                    <h3 className="font-headline text-3xl font-bold mb-4">Acceso Instantáneo</h3>
-                    <p className="text-slate-500 text-lg font-body">
+                    <h3 className="font-headline text-3xl font-bold mb-4 text-text dark:text-white">Acceso Instantáneo</h3>
+                    <p className="text-slate-600 dark:text-slate-300 text-lg font-body">
                        Previsualiza cualquier PDF directamente en el navegador con nuestra tecnología de renderizado fluido optimizada para móviles.
                     </p>
                   </div>
-                  <div className="absolute right-[-10%] bottom-[-20%] w-[300px] h-[300px] liquid-glass rounded-full border-primary/10 group-hover:scale-110 transition-transform"></div>
+                  <div className="absolute right-[-10%] bottom-[-20%] w-[300px] h-[300px] liquid-glass rounded-full border border-primary/10 group-hover:scale-110 transition-transform"></div>
                </div>
             </div>
           </div>

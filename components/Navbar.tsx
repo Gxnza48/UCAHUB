@@ -23,7 +23,7 @@ export default function Navbar({ user }: { user: any }) {
 
   return (
     <nav suppressHydrationWarning className="fixed w-full top-0 z-50 transition-all duration-300 px-4 md:px-8 py-4">
-      <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6 bg-white/70 dark:bg-slate-900/40 backdrop-blur-2xl border border-white/20 dark:border-white/5 shadow-2xl rounded-2xl">
+      <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6 bg-white/70 dark:bg-black/40 backdrop-blur-3xl border border-white/20 dark:border-white/10 shadow-xl dark:shadow-none rounded-2xl transition-all duration-300">
         
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
