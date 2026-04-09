@@ -23,9 +23,9 @@ export default function HubFilters({ searchParams }: { searchParams: { q?: strin
       <form method="GET" action="/hub" className="flex flex-wrap items-center gap-4 w-full">
         {searchParams.q && <input type="hidden" name="q" value={searchParams.q} />}
         
-        <div className="flex items-center gap-2 px-4 py-3 bg-white dark:bg-slate-800/80 rounded-2xl shadow-sm border border-slate-200/50 dark:border-slate-700/50 focus-within:ring-2 ring-primary-container/20 dark:ring-blue-500/20 transition-all hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600">
-          <GraduationCap className="w-5 h-5 text-primary-container dark:text-blue-400" />
-          <select name="carrera" defaultValue={searchParams.carrera || ''} onChange={handleSelectChange} className="bg-transparent border-none focus:ring-0 text-sm font-bold text-slate-700 dark:text-slate-200 min-w-[140px] outline-none cursor-pointer appearance-none">
+        <div className="flex items-center gap-2 px-5 py-3 liquid-glass rounded-2xl border-primary/10 transition-all hover:bg-white/60 dark:hover:bg-slate-800/60 shadow-sm">
+          <GraduationCap className="w-5 h-5 text-primary" />
+          <select name="carrera" defaultValue={searchParams.carrera || ''} onChange={handleSelectChange} className="bg-transparent border-none focus:ring-0 text-sm font-bold text-text dark:text-slate-200 min-w-[160px] outline-none cursor-pointer appearance-none font-headline">
             <option value="" className="text-slate-900">Todas las Carreras</option>
             <option value="Abogacía" className="text-slate-900">Abogacía</option>
             <option value="Contador Público" className="text-slate-900">Contador Público</option>
@@ -39,9 +39,9 @@ export default function HubFilters({ searchParams }: { searchParams: { q?: strin
           </select>
         </div>
 
-        <div className="flex items-center gap-2 px-4 py-3 bg-white dark:bg-slate-800/80 rounded-2xl shadow-sm border border-slate-200/50 dark:border-slate-700/50 focus-within:ring-2 ring-primary-container/20 dark:ring-blue-500/20 transition-all hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600">
-          <FileText className="w-5 h-5 text-primary-container dark:text-blue-400" />
-          <select name="tipo" defaultValue={searchParams.tipo || ''} onChange={handleSelectChange} className="bg-transparent border-none focus:ring-0 text-sm font-bold text-slate-700 dark:text-slate-200 min-w-[140px] outline-none cursor-pointer appearance-none">
+        <div className="flex items-center gap-2 px-5 py-3 liquid-glass rounded-2xl border-primary/10 transition-all hover:bg-white/60 dark:hover:bg-slate-800/60 shadow-sm">
+          <FileText className="w-5 h-5 text-primary" />
+          <select name="tipo" defaultValue={searchParams.tipo || ''} onChange={handleSelectChange} className="bg-transparent border-none focus:ring-0 text-sm font-bold text-text dark:text-slate-200 min-w-[160px] outline-none cursor-pointer appearance-none font-headline">
             <option value="" className="text-slate-900">Todos los Tipos</option>
             <option value="Resumen" className="text-slate-900">Resumen</option>
             <option value="Examen Anterior" className="text-slate-900">Examen Anterior</option>
@@ -51,7 +51,7 @@ export default function HubFilters({ searchParams }: { searchParams: { q?: strin
         </div>
 
         {(searchParams.q || searchParams.carrera || searchParams.tipo || searchParams.materia) && (
-          <Link href="/hub" className="ml-auto text-red-500 dark:text-red-400 text-sm font-bold flex items-center gap-1.5 hover:underline transition-colors bg-red-50 dark:bg-red-500/10 px-4 py-2 rounded-xl">
+          <Link href="/hub" className="ml-auto text-cta text-xs font-black uppercase tracking-widest flex items-center gap-2 hover:opacity-80 transition-all bg-cta/5 px-5 py-3 rounded-2xl border border-cta/10">
             <FilterX className="w-4 h-4" />
             Limpiar filtros
           </Link>

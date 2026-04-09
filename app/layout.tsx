@@ -1,9 +1,21 @@
+import { Outfit, Inter } from 'next/font/google';
 import { createClient } from "@/utils/supabase/server";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import SmoothScroll from '@/components/SmoothScroll';
+
+const outfit = Outfit({ 
+  subsets: ['latin'],
+  variable: '--font-headline',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+});
 
 export const metadata: Metadata = {
   title: "UCAHUB | Recursos Universitarios",
@@ -19,14 +31,16 @@ export default async function RootLayout({
   const { data: { user } } = await supabase.auth.getUser();
 
   return (
-    <html lang="es" suppressHydrationWarning className="scroll-smooth" style={{ scrollBehavior: 'smooth' }} data-scroll-behavior="smooth">
-      <body suppressHydrationWarning className="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white flex flex-col min-h-screen transition-colors duration-300 dark:bg-[#0f172a] dark:text-slate-200">
+    <html lang="es" suppressHydrationWarning className={`${outfit.variable} ${inter.variable}`}>
+      <body suppressHydrationWarning className="bg-background text-text flex flex-col min-h-screen transition-colors duration-300 font-body">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar user={user} />
-          <main className="flex-grow mb-auto flex flex-col w-full relative pt-16">
-            {children}
-          </main>
-          <Footer />
+          <SmoothScroll>
+            <Navbar user={user} />
+            <main className="flex-grow flex flex-col w-full relative pt-16">
+              {children}
+            </main>
+            <Footer />
+          </SmoothScroll>
         </ThemeProvider>
       </body>
     </html>
