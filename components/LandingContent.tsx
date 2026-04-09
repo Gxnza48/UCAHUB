@@ -64,13 +64,13 @@ export default function LandingContent({ user }: { user: any }) {
       gsap.from('.feature-card', {
         scrollTrigger: {
           trigger: '.features-grid',
-          start: 'top 95%',
+          start: 'top bottom-=100', // Trigger as soon as it enters
+          toggleActions: 'play none none none',
         },
         y: 30,
         opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power1.out',
+        duration: 0.8,
+        ease: 'power2.out',
       });
 
       // Text Gradient Pulse
@@ -152,7 +152,7 @@ export default function LandingContent({ user }: { user: any }) {
 
       {/* Features Storytelling */}
       <section id="discover" className="py-32 px-6 relative bg-background border-none">
-        <div className="max-w-7xl mx-auto min-h-screen">
+        <div className="max-w-7xl mx-auto">
           <div className="reveal-section flex flex-col items-center text-center mb-24 relative">
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/20 blur-[100px] pointer-events-none rounded-full"></div>
             <h2 className="font-headline text-5xl md:text-[5.5rem] font-black text-text dark:text-white mb-8 tracking-tighter leading-[0.9] relative z-10">
@@ -184,12 +184,12 @@ export default function LandingContent({ user }: { user: any }) {
               </div>
             </div>
 
-            <div className="feature-card card-premium bg-slate-950 text-white border-transparent">
+            <div className="feature-card card-premium bg-white dark:bg-black/80 group">
                <div className="p-2">
                   <div className="inline-block p-3 bg-white/10 rounded-2xl text-cta mb-6">
                     <Search className="w-6 h-6" />
                   </div>
-                  <h3 className="font-headline text-3xl font-bold mb-4 text-white">Filtros de Precisión</h3>
+                  <h3 className="font-headline text-3xl font-bold mb-4 text-slate-800 dark:text-white">Filtros de Precisión</h3>
                   <p className="text-slate-100 text-lg font-body font-medium leading-relaxed">
                     Localiza el examen del año pasado o los apuntes de ese profesor específico con nuestra búsqueda semántica avanzada.
                   </p>
