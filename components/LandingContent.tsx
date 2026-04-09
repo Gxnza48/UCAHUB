@@ -15,6 +15,15 @@ export default function LandingContent({ user }: { user: any }) {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Refresh ScrollTrigger when images load or after a short delay
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero Animation
       gsap.from('.hero-content > *', {
@@ -31,13 +40,13 @@ export default function LandingContent({ user }: { user: any }) {
         gsap.from(section, {
           scrollTrigger: {
             trigger: section,
-            start: 'top 80%',
+            start: 'top 85%',
             toggleActions: 'play none none reverse',
           },
-          y: 60,
+          y: 40,
           opacity: 0,
-          duration: 1.2,
-          ease: 'power3.out',
+          duration: 1,
+          ease: 'power2.out',
         });
       });
 
@@ -45,13 +54,13 @@ export default function LandingContent({ user }: { user: any }) {
       gsap.from('.feature-card', {
         scrollTrigger: {
           trigger: '.features-grid',
-          start: 'top 75%',
+          start: 'top 85%',
         },
-        y: 40,
+        y: 30,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'back.out(1.7)',
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power1.out',
       });
 
       // Text Gradient Pulse
@@ -143,8 +152,8 @@ export default function LandingContent({ user }: { user: any }) {
       </section>
 
       {/* Features Storytelling */}
-      <section id="discover" className="py-32 px-6 relative">
-        <div className="max-w-7xl mx-auto">
+      <section id="discover" className="py-32 px-6 relative bg-background">
+        <div className="max-w-7xl mx-auto min-h-screen">
           <div className="reveal-section flex flex-col items-center text-center mb-24 relative">
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/20 blur-[100px] pointer-events-none rounded-full"></div>
             <h2 className="font-headline text-5xl md:text-[5.5rem] font-black text-text dark:text-white mb-8 tracking-tighter leading-[0.9] relative z-10">

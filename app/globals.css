@@ -7,8 +7,8 @@
   --color-primary-container: #818CF8;
   --color-secondary: #00D1FF;
   --color-cta: #F59E0B;
-  --color-background: #ffffff;
-  --color-text: #0a0a0a;
+  --color-background: var(--background);
+  --color-text: var(--foreground);
 
   --font-headline: var(--font-headline);
   --font-body: var(--font-body);
@@ -33,6 +33,7 @@
     --border: rgba(15, 23, 42, 0.08);
   }
 
+  :root.dark,
   .dark {
     --background: #000000;
     --foreground: #ffffff;
@@ -47,7 +48,7 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-body);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
