@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CloudUpload, Search, Download, FileText, File, ArrowRight, Star, Shield, Zap } from 'lucide-react';
+import { CloudUpload, Search, Download, FileText, File, ArrowRight, Star, Shield, Zap, Bot, Sparkles, MessageSquare } from 'lucide-react';
 import DotGrid from '@/components/DotGrid';
 import Particles from '@/components/Particles';
 
@@ -194,7 +194,7 @@ export default function LandingContent({ user }: { user: any }) {
                     <Search className="w-6 h-6" />
                   </div>
                   <h3 className="font-headline text-3xl font-bold mb-4 text-slate-800 dark:text-white">Filtros de Precisión</h3>
-                  <p className="text-slate-100 text-lg font-body font-medium leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-200 text-lg font-body font-medium leading-relaxed">
                     Localiza el examen del año pasado o los apuntes de ese profesor específico con nuestra búsqueda semántica avanzada.
                   </p>
                </div>
@@ -225,6 +225,88 @@ export default function LandingContent({ user }: { user: any }) {
                </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* AI Agent Section */}
+      <section className="reveal-section py-24 px-6 relative w-full overflow-hidden">
+        <div className="absolute inset-0 bg-slate-950 dark:bg-black z-0">
+           {/* Abstract AI Background glowing nodes */}
+           <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-cta/10 rounded-full blur-[120px] mix-blend-screen"></div>
+           <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-primary/20 rounded-full blur-[100px] mix-blend-screen"></div>
+           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 z-0"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-16">
+           {/* Text Content */}
+           <div className="flex-1 text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-cta/10 border border-cta/20 text-cta shadow-lg shadow-cta/10">
+                 <Sparkles className="w-4 h-4" />
+                 <span className="text-xs font-black uppercase tracking-widest">IA Integrada</span>
+              </div>
+              <h2 className="font-headline text-5xl md:text-7xl font-black text-white leading-tight mb-8">
+                Tu Copiloto <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta to-primary">Académico.</span>
+              </h2>
+              <p className="text-slate-300 text-lg md:text-xl font-body leading-relaxed mb-10 max-w-lg">
+                UCAHUB AI no es solo un chat. Es un tutor personalizado que lee tus resúmenes y PDFs al instante. Hazle preguntas, pídele síntesis y domina cualquier materia con ayuda divina.
+              </p>
+              
+              <div className="space-y-4">
+                 {[
+                   { icon: <Bot />, title: "Respuestas con Contexto" },
+                   { icon: <FileText />, title: "Lectura profunda de PDFs" },
+                   { icon: <MessageSquare />, title: "Disponible 24/7 sin límites" }
+                 ].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-4 text-white">
+                       <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cta shrink-0">{item.icon}</div>
+                       <span className="font-headline font-bold text-lg">{item.title}</span>
+                    </div>
+                 ))}
+              </div>
+           </div>
+
+           {/* Visual UI Mockup */}
+           <div className="flex-1 relative w-full h-[500px]">
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col">
+                 <div className="h-16 border-b border-white/10 flex items-center px-6 gap-4 bg-black/40 backdrop-blur-md shrink-0">
+                    <div className="flex gap-2">
+                       <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                       <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+                       <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                    </div>
+                    <div className="text-white/60 text-xs font-bold font-headline tracking-widest pl-4 border-l border-white/10">UCAHUB AI ENGINE</div>
+                 </div>
+
+                 {/* Chat mock messages */}
+                 <div className="p-8 flex flex-col gap-6 flex-1 overflow-hidden">
+                    <div className="self-end bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-lg">
+                      <p className="text-sm font-medium">¿Cuáles son los 3 conceptos clave de este PDF sobre Algoritmos?</p>
+                    </div>
+                    <div className="self-start bg-slate-800 text-white p-4 rounded-2xl rounded-tl-none max-w-[90%] shadow-lg border border-white/5 relative group">
+                      <div className="absolute -left-3 -top-3 w-8 h-8 bg-cta rounded-full flex items-center justify-center shadow-lg"><Bot className="w-4 h-4 text-black" /></div>
+                      <div className="pl-2">
+                        <p className="text-sm font-medium leading-relaxed text-slate-200">
+                          Basado en el documento "Estructuras2026.pdf", los 3 puntos clave son:<br/><br/>
+                          <span className="text-cta font-bold">1. Complejidad Ciclomática:</span> Análisis de rendimiento Big O.<br/>
+                          <span className="text-cta font-bold">2. Grafos Dirigidos:</span> Implementación con matrices de adyacencia.<br/>
+                          <span className="text-cta font-bold">3. Hash Tables:</span> Resolución dinámica de colisiones.<br/>
+                        </p>
+                      </div>
+                    </div>
+                 </div>
+                 
+                 {/* Input mock */}
+                 <div className="p-4 bg-slate-900/80 backdrop-blur-md shrink-0">
+                    <div className="w-full h-12 bg-black/50 rounded-xl border border-white/10 flex items-center px-4">
+                       <span className="block w-2/3 h-2 bg-white/20 rounded-full animate-pulse"></span>
+                    </div>
+                 </div>
+              </div>
+
+              {/* Floating aesthetic elements */}
+              <div className="absolute -right-8 top-16 w-32 h-32 bg-primary/20 backdrop-blur-3xl rounded-full mix-blend-screen animate-pulse"></div>
+              <div className="absolute -left-8 bottom-16 w-40 h-40 bg-cta/20 backdrop-blur-3xl rounded-full mix-blend-screen animate-[pulse_3s_infinite]"></div>
+           </div>
         </div>
       </section>
 
