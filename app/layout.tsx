@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import SmoothScroll from '@/components/SmoothScroll';
 
-const outfit = Outfit({ 
+const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-headline',
 });
@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "UCAHUB | Recursos Universitarios",
+  title: "UCAHUB",
   description: "Todos tus recursos universitarios en un solo lugar.",
 };
 

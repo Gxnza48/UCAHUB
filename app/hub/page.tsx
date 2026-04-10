@@ -2,7 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import FileCard from '@/components/FileCard';
 import HubFilters from '@/components/HubFilters';
 import Link from 'next/link';
-import { Search, SearchX, TrendingUp } from 'lucide-react';
+import { Search, SearchX, TrendingUp, HardDrive, ArrowRight } from 'lucide-react';
 
 export default async function HubPage(props: { searchParams: Promise<{ q?: string, carrera?: string, tipo?: string, materia?: string }> }) {
   const searchParams = await props.searchParams;
@@ -58,6 +58,27 @@ export default async function HubPage(props: { searchParams: Promise<{ q?: strin
           </form>
         </div>
       </header>
+
+      {/* Drives Banner Link */}
+      {!searchParams.q && !searchParams.carrera && !searchParams.tipo && (
+        <Link href="/hub/drives" className="group rounded-3xl bg-gradient-to-r from-primary to-blue-500 p-1 mb-16 block relative overflow-hidden active:scale-[0.98] transition-all duration-300 shadow-2xl shadow-primary/20">
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+          <div className="bg-slate-900/40 backdrop-blur-md rounded-[23px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 transition-colors group-hover:bg-slate-900/20">
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:rotate-6 transition-transform">
+                <HardDrive className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="text-2xl md:text-3xl font-headline font-bold text-white mb-1">Drives Especiales</h3>
+                <p className="text-white/80 font-body text-sm md:text-base">Explorá gigabytes de archivos comunitarios compartidos en Google Drive.</p>
+              </div>
+            </div>
+            <div className="bg-white text-primary px-6 py-3 rounded-xl font-bold font-headline flex items-center gap-2 group-hover:px-8 transition-all">
+              Abrir Directorio <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+        </Link>
+      )}
 
       {/* Trending Section - Only visible when not searching */}
       {!searchParams.q && !searchParams.carrera && !searchParams.tipo && trendingFiles && trendingFiles.length > 0 && (
