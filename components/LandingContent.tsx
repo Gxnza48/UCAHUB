@@ -34,6 +34,9 @@ export default function LandingContent({ user }: { user: any }) {
   }, []);
 
   useEffect(() => {
+    // Add performance hints to elements we are going to animate
+    gsap.set('.reveal-section, .hero-content > *, .feature-card', { force3D: true });
+
     const ctx = gsap.context(() => {
       // Hero Animation
       gsap.from('.hero-content > *', {
@@ -79,6 +82,7 @@ export default function LandingContent({ user }: { user: any }) {
         duration: 8,
         repeat: -1,
         ease: 'none',
+        force3D: true
       });
     }, containerRef);
 
@@ -91,41 +95,41 @@ export default function LandingContent({ user }: { user: any }) {
       <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(79,70,229,0.08)_0%,_transparent_50%)]"></div>
-          <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-cta/5 rounded-full blur-[100px]"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(79,70,229,0.08)_0%,_transparent_50%)] transform-gpu"></div>
+          <div className="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-[100px] transform-gpu"></div>
+          <div className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-cta/5 rounded-full blur-[80px] transform-gpu"></div>
           <Particles 
-            count={100}
+            count={60}
             color="#4F46E5"
-            opacity={0.4}
+            opacity={0.3}
           />
         </div>
 
-        <div className="max-w-6xl mx-auto text-center z-10 hero-content mt-12">
+        <div className="max-w-6xl mx-auto text-center z-10 hero-content mt-12 will-change-transform">
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-white/10 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-white/5 shadow-xl">
-             <span className="w-2 h-2 rounded-full bg-cta animate-ping"></span>
+             <span className="w-2 h-2 rounded-full bg-cta animate-ping transform-gpu"></span>
              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
                Nueva Era Académica UCA
              </span>
           </div>
           
-          <h1 className="font-headline text-7xl md:text-[10rem] font-black text-text dark:text-white tracking-tight leading-[0.85] mb-8">
+          <h1 className="font-headline text-7xl md:text-[10rem] font-black text-text dark:text-white tracking-tight leading-[0.85] mb-8 relative z-10">
             Domina el <br/>
-            <span className="text-gradient">Futuro</span>
+            <span className="text-gradient transform-gpu">Futuro</span>
           </h1>
           
-          <p className="font-body text-lg md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-16 leading-relaxed">
+          <p className="font-body text-lg md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-16 leading-relaxed relative z-10">
             La plataforma inteligente de intercambio académico donde el conocimiento de hoy construye las carreras del mañana.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link href={user ? "/hub" : "/auth"} className="btn-premium bg-primary text-white text-lg px-12 py-5 shadow-2xl shadow-primary/30 group">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
+            <Link href={user ? "/hub" : "/auth"} className="btn-premium bg-primary text-white text-lg px-12 py-5 shadow-2xl shadow-primary/30 group transform-gpu transition-all active:scale-95 hover:shadow-primary/40">
               <span className="relative z-10 flex items-center gap-2">
                 {user ? "Empezar a Explorar" : "Unirme a la Red"}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform transform-gpu" />
               </span>
             </Link>
-            <Link href="#discover" className="btn-premium liquid-glass text-slate-700 dark:text-white text-lg px-10 py-5 group">
+            <Link href="#discover" className="btn-premium liquid-glass text-slate-700 dark:text-white text-lg px-10 py-5 group transform-gpu active:scale-95 transition-all">
               Ver Ecosistema
             </Link>
           </div>
@@ -133,7 +137,7 @@ export default function LandingContent({ user }: { user: any }) {
       </section>
 
       {/* Social Proof / Stats Reveal */}
-      <section className="reveal-section py-20 px-6">
+      <section className="reveal-section py-20 px-6 transform-gpu">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
@@ -142,8 +146,8 @@ export default function LandingContent({ user }: { user: any }) {
               { label: 'Descargas', val: '150k+', icon: <Zap className="w-5 h-5" /> },
               { label: 'Puntuación', val: '4.9/5', icon: <Star className="w-5 h-5" /> },
             ].map((stat, i) => (
-              <div key={i} className="text-center group">
-                <div className="w-12 h-12 mx-auto mb-4 liquid-glass rounded-xl flex items-center justify-center text-primary border-primary/10 group-hover:scale-110 group-hover:rotate-6 transition-all">
+              <div key={i} className="text-center group perspective-1000">
+                <div className="w-12 h-12 mx-auto mb-4 liquid-glass rounded-xl flex items-center justify-center text-primary border-primary/10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 transform-gpu">
                   {stat.icon}
                 </div>
                 <div className="text-3xl font-headline font-black text-text dark:text-white mb-1">{stat.val}</div>
@@ -157,18 +161,18 @@ export default function LandingContent({ user }: { user: any }) {
       {/* Features Storytelling */}
       <section id="discover" className="py-32 px-6 relative bg-background border-none">
         <div className="max-w-7xl mx-auto">
-          <div className="reveal-section flex flex-col items-center text-center mb-24 relative">
-            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/20 blur-[100px] pointer-events-none rounded-full"></div>
+          <div className="reveal-section flex flex-col items-center text-center mb-24 relative transform-gpu">
+            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary/10 blur-[80px] pointer-events-none rounded-full transform-gpu"></div>
             <h2 className="font-headline text-5xl md:text-[5.5rem] font-black text-text dark:text-white mb-8 tracking-tighter leading-[0.9] relative z-10">
               Diseñado para la <br/> <span className="text-primary italic font-light">Excelencia.</span>
             </h2>
-            <p className="max-w-2xl text-slate-500 text-lg md:text-xl font-body">
+            <p className="max-w-2xl text-slate-500 text-lg md:text-xl font-body relative z-10">
               Hemos reinventado el intercambio de apuntes. No es solo un repositorio, es un centro de inteligencia colectiva.
             </p>
           </div>
 
           <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="feature-card card-premium md:col-span-2 group">
+            <div className="feature-card card-premium md:col-span-2 group transform-gpu">
               <div className="flex flex-col md:flex-row gap-12 items-center">
                 <div className="flex-1">
                   <div className="inline-block p-3 bg-primary/10 rounded-2xl text-primary mb-6">
@@ -180,15 +184,15 @@ export default function LandingContent({ user }: { user: any }) {
                   </p>
                 </div>
                 <div className="hidden md:block w-1/3 aspect-square relative">
-                   <div className="absolute inset-0 bg-primary/20 rounded-3xl blur-2xl group-hover:bg-primary/30 transition-all"></div>
-                   <div className="relative w-full h-full liquid-glass rounded-3xl flex items-center justify-center">
-                      <CloudUpload className="w-20 h-20 text-primary opacity-40 group-hover:scale-110 transition-transform" />
+                   <div className="absolute inset-0 bg-primary/10 rounded-3xl blur-xl group-hover:bg-primary/20 transition-colors duration-500 transform-gpu"></div>
+                   <div className="relative w-full h-full liquid-glass rounded-3xl flex items-center justify-center transform-gpu">
+                      <CloudUpload className="w-20 h-20 text-primary opacity-40 group-hover:scale-110 transition-transform duration-500 transform-gpu" />
                    </div>
                 </div>
               </div>
             </div>
 
-            <div className="feature-card card-premium bg-white dark:bg-black/80 group">
+            <div className="feature-card card-premium bg-white dark:bg-black/80 group transform-gpu">
                <div className="p-2">
                   <div className="inline-block p-3 bg-white/10 rounded-2xl text-cta mb-6">
                     <Search className="w-6 h-6" />
@@ -200,7 +204,7 @@ export default function LandingContent({ user }: { user: any }) {
                </div>
             </div>
 
-            <div className="feature-card card-premium group bg-white dark:bg-black/80">
+            <div className="feature-card card-premium group bg-white dark:bg-black/80 transform-gpu">
                <div className="inline-block p-3 bg-cta/10 rounded-2xl text-cta mb-6">
                   <Star className="w-6 h-6" />
                </div>
@@ -210,7 +214,7 @@ export default function LandingContent({ user }: { user: any }) {
                </p>
             </div>
 
-            <div className="feature-card card-premium md:col-span-2 overflow-hidden relative group bg-white dark:bg-black/80">
+            <div className="feature-card card-premium md:col-span-2 overflow-hidden relative group bg-white dark:bg-black/80 transform-gpu">
                <div className="flex items-center justify-between">
                   <div className="max-w-md relative z-10">
                     <div className="inline-block p-3 bg-secondary/10 rounded-2xl text-secondary mb-6">
@@ -221,7 +225,7 @@ export default function LandingContent({ user }: { user: any }) {
                        Previsualiza cualquier PDF directamente en el navegador con nuestra tecnología de renderizado fluido optimizada para móviles.
                     </p>
                   </div>
-                  <div className="absolute right-[-10%] bottom-[-20%] w-[300px] h-[300px] liquid-glass rounded-full border border-primary/10 group-hover:scale-110 transition-transform"></div>
+                  <div className="absolute right-[-10%] bottom-[-20%] w-[300px] h-[300px] bg-primary/5 rounded-full border border-primary/10 group-hover:scale-105 transition-transform duration-700 transform-gpu"></div>
                </div>
             </div>
           </div>
@@ -229,23 +233,23 @@ export default function LandingContent({ user }: { user: any }) {
       </section>
 
       {/* AI Agent Section */}
-      <section className="reveal-section py-24 px-6 relative w-full overflow-hidden">
+      <section className="reveal-section py-24 px-6 relative w-full overflow-hidden transform-gpu">
         <div className="absolute inset-0 bg-slate-950 dark:bg-black z-0">
-           {/* Abstract AI Background glowing nodes */}
-           <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-cta/10 rounded-full blur-[120px] mix-blend-screen"></div>
-           <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] bg-primary/20 rounded-full blur-[100px] mix-blend-screen"></div>
+           {/* Abstract AI Background glowing nodes (Optimized constraints) */}
+           <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cta/10 rounded-full blur-[80px] transform-gpu pointer-events-none"></div>
+           <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px] transform-gpu pointer-events-none"></div>
            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 z-0"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-16">
            {/* Text Content */}
            <div className="flex-1 text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-cta/10 border border-cta/20 text-cta shadow-lg shadow-cta/10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-cta/10 border border-cta/20 text-cta shadow-lg shadow-cta/10 transform-gpu">
                  <Sparkles className="w-4 h-4" />
                  <span className="text-xs font-black uppercase tracking-widest">IA Integrada</span>
               </div>
               <h2 className="font-headline text-5xl md:text-7xl font-black text-white leading-tight mb-8">
-                Tu Copiloto <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta to-primary">Académico.</span>
+                Tu Copiloto <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta to-primary transform-gpu">Académico.</span>
               </h2>
               <p className="text-slate-300 text-lg md:text-xl font-body leading-relaxed mb-10 max-w-lg">
                 UCAHUB AI no es solo un chat. Es un tutor personalizado que lee tus resúmenes y PDFs al instante. Hazle preguntas, pídele síntesis y domina cualquier materia con ayuda divina.
@@ -257,7 +261,7 @@ export default function LandingContent({ user }: { user: any }) {
                    { icon: <FileText />, title: "Lectura profunda de PDFs" },
                    { icon: <MessageSquare />, title: "Disponible 24/7 sin límites" }
                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-4 text-white">
+                    <div key={idx} className="flex items-center gap-4 text-white hover:-translate-y-0.5 transition-transform duration-300 transform-gpu">
                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cta shrink-0">{item.icon}</div>
                        <span className="font-headline font-bold text-lg">{item.title}</span>
                     </div>
@@ -267,8 +271,8 @@ export default function LandingContent({ user }: { user: any }) {
 
            {/* Visual UI Mockup */}
            <div className="flex-1 relative w-full h-[500px]">
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col">
-                 <div className="h-16 border-b border-white/10 flex items-center px-6 gap-4 bg-black/40 backdrop-blur-md shrink-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu z-10">
+                 <div className="h-16 border-b border-white/10 flex items-center px-6 gap-4 bg-black/60 shrink-0">
                     <div className="flex gap-2">
                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
                        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
@@ -278,11 +282,11 @@ export default function LandingContent({ user }: { user: any }) {
                  </div>
 
                  {/* Chat mock messages */}
-                 <div className="p-8 flex flex-col gap-6 flex-1 overflow-hidden">
-                    <div className="self-end bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-lg">
+                 <div className="p-8 flex flex-col gap-6 flex-1 overflow-hidden shrink-0">
+                    <div className="self-end bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-lg transform-gpu transition-all">
                       <p className="text-sm font-medium">¿Cuáles son los 3 conceptos clave de este PDF sobre Algoritmos?</p>
                     </div>
-                    <div className="self-start bg-slate-800 text-white p-4 rounded-2xl rounded-tl-none max-w-[90%] shadow-lg border border-white/5 relative group">
+                    <div className="self-start bg-slate-800 text-white p-4 rounded-2xl rounded-tl-none max-w-[90%] shadow-lg border border-white/5 relative group transform-gpu">
                       <div className="absolute -left-3 -top-3 w-8 h-8 bg-cta rounded-full flex items-center justify-center shadow-lg"><Bot className="w-4 h-4 text-black" /></div>
                       <div className="pl-2">
                         <p className="text-sm font-medium leading-relaxed text-slate-200">
@@ -296,16 +300,18 @@ export default function LandingContent({ user }: { user: any }) {
                  </div>
                  
                  {/* Input mock */}
-                 <div className="p-4 bg-slate-900/80 backdrop-blur-md shrink-0">
-                    <div className="w-full h-12 bg-black/50 rounded-xl border border-white/10 flex items-center px-4">
-                       <span className="block w-2/3 h-2 bg-white/20 rounded-full animate-pulse"></span>
+                 <div className="p-4 bg-slate-900 shrink-0">
+                    <div className="w-full h-12 bg-black/50 rounded-xl border border-white/10 flex items-center px-4 overflow-hidden relative">
+                       <span className="block w-2/3 h-2 bg-white/20 rounded-full transform-gpu relative z-10 overflow-hidden">
+                         <span className="absolute inset-0 bg-white/40 w-1/4 animate-[translateX_2s_infinite]"></span>
+                       </span>
                     </div>
                  </div>
               </div>
 
-              {/* Floating aesthetic elements */}
-              <div className="absolute -right-8 top-16 w-32 h-32 bg-primary/20 backdrop-blur-3xl rounded-full mix-blend-screen animate-pulse"></div>
-              <div className="absolute -left-8 bottom-16 w-40 h-40 bg-cta/20 backdrop-blur-3xl rounded-full mix-blend-screen animate-[pulse_3s_infinite]"></div>
+              {/* Floating aesthetic elements (Optimized) */}
+              <div className="absolute -right-4 top-16 w-24 h-24 bg-primary/20 rounded-full blur-[40px] transform-gpu pointer-events-none z-0"></div>
+              <div className="absolute -left-4 bottom-16 w-32 h-32 bg-cta/15 rounded-full blur-[40px] transform-gpu pointer-events-none z-0"></div>
            </div>
         </div>
       </section>
