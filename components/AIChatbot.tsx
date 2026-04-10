@@ -25,7 +25,7 @@ export default function AIChatbot({ fileContext, fileUrl }: { fileContext: FileC
     {
       id: 'welcome',
       role: 'assistant',
-      content: `¡Hola! Soy el asistente de IA de UCAHUB. Veo que estás estudiando "${fileContext.title}". ¿En qué te puedo ayudar hoy?`
+      content: `¡Hola! Soy UCABOT. Veo que estás estudiando "${fileContext.title}". ¿En qué te puedo ayudar hoy?`
     }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -107,7 +107,7 @@ export default function AIChatbot({ fileContext, fileUrl }: { fileContext: FileC
       >
         <div className="flex items-center gap-2 font-headline font-bold">
           <Bot className="w-5 h-5 text-cta" />
-          <span>Asistente UCAHUB</span>
+          <span>UCABOT</span>
         </div>
         <div className="flex items-center gap-1">
           {!isMinimized && (

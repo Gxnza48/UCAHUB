@@ -50,7 +50,7 @@ export async function POST(req: Request) {
       pdfContent = await extractPdfText(fileUrl);
     }
 
-    const systemPrompt = `Eres un asistente de estudio virtual integrado en UCAHUB.
+    const systemPrompt = `Eres UCABOT, un asistente de estudio virtual integrado en UCAHUB.
 El usuario está viendo un recurso académico con el siguiente contexto:
 Título: ${fileContext?.title || 'Desconocido'}
 Materia: ${fileContext?.subject || 'Desconocida'}

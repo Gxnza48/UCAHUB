@@ -246,13 +246,13 @@ export default function LandingContent({ user }: { user: any }) {
            <div className="flex-1 text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-cta/10 border border-cta/20 text-cta shadow-lg shadow-cta/10 transform-gpu">
                  <Sparkles className="w-4 h-4" />
-                 <span className="text-xs font-black uppercase tracking-widest">IA Integrada</span>
+                 <span className="text-xs font-black uppercase tracking-widest">UCABOT</span>
               </div>
               <h2 className="font-headline text-5xl md:text-7xl font-black text-white leading-tight mb-8">
                 Tu Copiloto <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta to-primary transform-gpu">Académico.</span>
               </h2>
               <p className="text-slate-300 text-lg md:text-xl font-body leading-relaxed mb-10 max-w-lg">
-                UCAHUB AI no es solo un chat. Es un tutor personalizado que lee tus resúmenes y PDFs al instante. Hazle preguntas, pídele síntesis y domina cualquier materia con ayuda divina.
+                UCABOT no es solo un chat. Es un tutor personalizado que lee tus resúmenes y PDFs al instante. Hazle preguntas, pídele síntesis y domina cualquier materia con ayuda divina.
               </p>
               
               <div className="space-y-4">
@@ -278,7 +278,7 @@ export default function LandingContent({ user }: { user: any }) {
                        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
                     </div>
-                    <div className="text-white/60 text-xs font-bold font-headline tracking-widest pl-4 border-l border-white/10">UCAHUB AI ENGINE</div>
+                    <div className="text-white/60 text-xs font-bold font-headline tracking-widest pl-4 border-l border-white/10">UCABOT ENGINE</div>
                  </div>
 
                  {/* Chat mock messages */}
@@ -308,10 +308,6 @@ export default function LandingContent({ user }: { user: any }) {
                     </div>
                  </div>
               </div>
-
-              {/* Floating aesthetic elements (Optimized) */}
-              <div className="absolute -right-4 top-16 w-24 h-24 bg-primary/20 rounded-full blur-[40px] transform-gpu pointer-events-none z-0"></div>
-              <div className="absolute -left-4 bottom-16 w-32 h-32 bg-cta/15 rounded-full blur-[40px] transform-gpu pointer-events-none z-0"></div>
            </div>
         </div>
       </section>
