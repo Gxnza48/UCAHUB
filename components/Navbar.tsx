@@ -45,6 +45,9 @@ export default function Navbar({ user }: { user: any }) {
               <Link href="/leaderboard" className={`px-4 py-2 rounded-xl transition-all duration-300 ${pathname === '/leaderboard' ? 'bg-primary text-white shadow-md' : 'text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-blue-400'}`}>
                 Hall de la Fama
               </Link>
+              <Link href="/hub/drives" className={`px-4 py-2 rounded-xl transition-all duration-300 ${pathname === '/hub/drives' ? 'bg-primary text-white shadow-md' : 'flex items-center gap-1 text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:text-primary dark:hover:text-blue-400'}`}>
+                Drives Especiales
+              </Link>
             </div>
           )}
         </div>
@@ -86,6 +89,7 @@ export default function Navbar({ user }: { user: any }) {
            {user ? (
              <>
                <Link href="/hub" onClick={() => setMobileMenuOpen(false)} className={`p-3 rounded-xl font-bold ${pathname === '/hub' ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-300'}`}>Explorar</Link>
+               <Link href="/hub/drives" onClick={() => setMobileMenuOpen(false)} className={`p-3 rounded-xl font-bold ${pathname === '/hub/drives' ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-300'}`}>Drives Especiales</Link>
                <Link href="/upload" onClick={() => setMobileMenuOpen(false)} className={`p-3 rounded-xl font-bold ${pathname === '/upload' ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-300'}`}>Subir Archivo</Link>
                <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className={`p-3 rounded-xl font-bold ${pathname === '/profile' ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-300'}`}>Mi Perfil</Link>
                <button onClick={handleSignOut} className="p-3 text-left rounded-xl font-bold text-red-500 hover:bg-red-50/50">Cerrar Sesión</button>

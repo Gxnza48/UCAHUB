@@ -6,6 +6,7 @@ import { PdfPreview } from '@/components/PdfPreview';
 import { DownloadButton } from '@/components/DownloadButton';
 import { RatingSystem } from '@/components/RatingSystem';
 import { BookmarkButton } from '@/components/BookmarkButton';
+import AIChatbot from '@/components/AIChatbot';
 
 export default async function FileDetail(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -150,6 +151,13 @@ export default async function FileDetail(props: { params: Promise<{ id: string }
           </div>
         </div>
       </div>
+
+      <AIChatbot fileUrl={file.file_url} fileContext={{
+        title: file.title,
+        subject: file.subject,
+        career: file.career,
+        description: file.description
+      }} />
     </div>
   );
 }

@@ -9,7 +9,12 @@ export function PdfPreview({ fileUrl }: { fileUrl: string }) {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+      const mobileStatus = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      setIsMobile(mobileStatus);
+      if (mobileStatus) {
+        // If mobile, the iframe never renders to fire onLoad, so clear loading manually.
+        setLoading(false);
+      }
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
