@@ -5,18 +5,51 @@ const PDF_CHAR_LIMIT = 8000;
 
 async function extractPdfText(fileUrl: string): Promise<string> {
   try {
-    // pdf-parse causes Next.js build errors (DOMMatrix polyfill). 
-    // We use a free reader API (jina.ai) to extract the text from the public PDF URL.
-    const readerUrl = `https://r.jina.ai/${fileUrl}`;
-    const res = await fetch(readerUrl, { signal: AbortSignal.timeout(10000) });
-    if (!res.ok) return '';
+    if (!fileUrl) return '';
+    
+    // Encode the URL carefully to handle spaces and special characters
+    const encodedUrl = encodeURIComponent(fileUrl);
+    const readerUrl = `https://r.jina.ai/${fileUrl}`; // Jina usually works better with the raw URL if it's already encoded, but let's be safe.
+    // Actually, Jina documentation says: https://r.jina.ai/https://your-url.com
+    // If we encode the whole thing, it might fail. If we don't, spaces might fail.
+    
+    // We'll use the raw fileUrl but ensure it's a valid URL string
+    const targetUrl = fileUrl.trim();
+    const finalReaderUrl = `https://r.jina.ai/${targetUrl}`;
+    
+    console.log("--- UCABOT Extraction Attempt ---");
+    console.log("Target PDF:", targetUrl);
+    
+    const res = await fetch(finalReaderUrl, { 
+      signal: AbortSignal.timeout(15000), // Increased from 10s to 15s
+      headers: {
+        'Accept': 'text/plain',
+        'X-No-Cache': 'true'
+      }
+    });
+
+    if (!res.ok) {
+      console.warn(`Jina Reader failed with status: ${res.status}`);
+      return '';
+    }
+
     const text = await res.text();
-    console.log("------------------ JINA AI RESPONSE -----------------");
-    console.log("Status:", res.status);
-    console.log("Jina Text Preview:", text.slice(0, 400));
-    console.log("-----------------------------------------------------");
-    const cleanText = text.replace(/\[.*?\]\(.*?\)/g, '').trim(); // Remove markdown links
-    return cleanText.length > PDF_CHAR_LIMIT ? cleanText.slice(0, PDF_CHAR_LIMIT) + '\n[... contenido truncado ...]' : cleanText;
+    console.log("Jina Text Preview:", text.slice(0, 200));
+    
+    // Clean markdown and excessive noise
+    const cleanText = text
+      .replace(/\[.*?\]\(.*?\)/g, '') // Remove markdown links
+      .replace(/!\[.*?\]\(.*?\)/g, '') // Remove markdown images
+      .trim();
+      
+    if (cleanText.length < 50 && text.includes('error')) {
+      console.warn('Jina returned potential error page');
+      return '';
+    }
+
+    return cleanText.length > PDF_CHAR_LIMIT 
+      ? cleanText.slice(0, PDF_CHAR_LIMIT) + '\n[... contenido truncado por longitud ...]' 
+      : cleanText;
   } catch (e) {
     console.warn('PDF extraction failed:', e);
     return '';
@@ -56,8 +89,18 @@ Título: ${fileContext?.title || 'Desconocido'}
 Materia: ${fileContext?.subject || 'Desconocida'}
 Carrera: ${fileContext?.career || 'Desconocida'}
 Descripción: ${fileContext?.description || 'Sin descripción'}
-${pdfContent ? `\n## Contenido del Documento\n${pdfContent}\n` : ''}
-Tu objetivo es ayudar al usuario a entender este material basándote PRINCIPALMENTE en el contenido del documento provisto. Responde con precisión, sé claro y conciso (tono académico pero amigable). Si la pregunta no tiene respuesta en el documento, indícalo honestamente.`;
+
+${pdfContent 
+  ? `## Contenido Extraído del PDF\n${pdfContent}\n` 
+  : `IMPORTANTE: No se pudo extraer el contenido profundo del PDF en este momento. Solo tienes acceso al resumen metadata de arriba.`}
+
+INSTRUCCIONES DE COMPORTAMIENTO:
+1. Tu objetivo es ayudar al usuario a entender este material basándote PRINCIPALMENTE en el contenido provisto.
+2. Responde con precisión, sé claro y conciso (tono académico pero amigable). 
+3. ${pdfContent 
+     ? 'Utiliza los datos del PDF para responder preguntas específicas.' 
+     : 'Dado que no tienes el contenido completo del PDF, responde basándote en el Título, Materia y Descripción. Si te preguntan algo muy específico del interior del documento que no sabes, indícalo amablemente diciendo que solo tienes acceso al resumen por ahora.'}
+4. Si la pregunta no tiene relación con el ámbito académico o el documento, redirige suavemente la conversación al estudio.`;
 
     const chatMessages = (messages as { role: string; content: string }[]).filter(
       (m) => m.content && m.role

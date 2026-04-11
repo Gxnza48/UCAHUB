@@ -53,7 +53,7 @@ export function ThemeToggle() {
           top: 0; left: 0; right: 0; bottom: 0;
           background-color: #85C1E9; /* Day blue */
           border-radius: 34px;
-          transition: background-color 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+          transition: background-color 0.6s ease;
           box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
           overflow: hidden;
         }
@@ -71,7 +71,7 @@ export function ThemeToggle() {
           background-color: #F4D03F; /* Sun yellow */
           border-radius: 50%;
           box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 0 10px rgba(244, 208, 63, 0.4);
-          transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+          transition: transform 0.6s cubic-bezier(0.34, 1.15, 0.64, 1), background-color 0.6s ease, box-shadow 0.6s ease;
           z-index: 2;
         }
 

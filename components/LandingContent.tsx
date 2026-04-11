@@ -109,17 +109,17 @@ export default function LandingContent({ user }: { user: any }) {
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-white/10 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-white/5 shadow-xl">
              <span className="w-2 h-2 rounded-full bg-cta animate-ping transform-gpu"></span>
              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
-               Nueva Era Académica UCA
+               El Hub Definitivo de la UCA
              </span>
           </div>
           
-          <h1 className="font-headline text-7xl md:text-[10rem] font-black text-text dark:text-white tracking-tight leading-[0.85] mb-8 relative z-10">
-            Domina el <br/>
-            <span className="text-gradient transform-gpu">Futuro</span>
+          <h1 className="font-headline text-7xl md:text-[8.5rem] font-black text-slate-900 dark:text-white tracking-tight leading-[0.85] mb-8 relative z-10">
+            Tu Carrera, <br/>
+            <span className="text-gradient transform-gpu">Sin Secretos</span>
           </h1>
           
           <p className="font-body text-lg md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-16 leading-relaxed relative z-10">
-            La plataforma inteligente de intercambio académico donde el conocimiento de hoy construye las carreras del mañana.
+            Accede a todos los resúmenes, parciales históricos y drives que necesitas para aprobar tu próxima materia. Todo organizado y al alcance de tu mano.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
@@ -234,11 +234,11 @@ export default function LandingContent({ user }: { user: any }) {
 
       {/* AI Agent Section */}
       <section className="reveal-section py-24 px-6 relative w-full overflow-hidden transform-gpu">
-        <div className="absolute inset-0 bg-slate-950 dark:bg-black z-0">
+        <div className="absolute inset-0 bg-slate-50 dark:bg-black z-0 transition-colors duration-500">
            {/* Abstract AI Background glowing nodes (Optimized constraints) */}
            <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cta/10 rounded-full blur-[80px] transform-gpu pointer-events-none"></div>
            <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[80px] transform-gpu pointer-events-none"></div>
-           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 z-0"></div>
+           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5 dark:opacity-20 z-0"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-16">
@@ -248,21 +248,21 @@ export default function LandingContent({ user }: { user: any }) {
                  <Sparkles className="w-4 h-4" />
                  <span className="text-xs font-black uppercase tracking-widest">UCABOT</span>
               </div>
-              <h2 className="font-headline text-5xl md:text-7xl font-black text-white leading-tight mb-8">
-                Tu Copiloto <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta to-primary transform-gpu">Académico.</span>
+              <h2 className="font-headline text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight mb-8">
+                Tu Tutor IA <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-cta to-primary transform-gpu">Universitario.</span>
               </h2>
-              <p className="text-slate-300 text-lg md:text-xl font-body leading-relaxed mb-10 max-w-lg">
-                UCABOT no es solo un chat. Es un tutor personalizado que lee tus resúmenes y PDFs al instante. Hazle preguntas, pídele síntesis y domina cualquier materia con ayuda divina.
+              <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl font-body leading-relaxed mb-10 max-w-lg">
+                Olvídate de leer PDFs de 100 páginas de corrido. UCABOT analiza tus apuntes al instante, resume temas complejos, encuentra respuestas a preguntas de parciales y te arma guías de estudio en segundos.
               </p>
               
               <div className="space-y-4">
                  {[
-                   { icon: <Bot />, title: "Respuestas con Contexto" },
-                   { icon: <FileText />, title: "Lectura profunda de PDFs" },
-                   { icon: <MessageSquare />, title: "Disponible 24/7 sin límites" }
+                   { icon: <Bot />, title: "Resuelve dudas de parciales" },
+                   { icon: <FileText />, title: "Sintetiza apuntes largos al instante" },
+                   { icon: <MessageSquare />, title: "Tu profesor particular 24/7" }
                  ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-4 text-white hover:-translate-y-0.5 transition-transform duration-300 transform-gpu">
-                       <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cta shrink-0">{item.icon}</div>
+                    <div key={idx} className="flex items-center gap-4 text-slate-800 dark:text-white hover:-translate-y-0.5 transition-transform duration-300 transform-gpu">
+                       <div className="w-10 h-10 rounded-xl bg-slate-200 dark:bg-white/10 flex items-center justify-center text-cta shrink-0">{item.icon}</div>
                        <span className="font-headline font-bold text-lg">{item.title}</span>
                     </div>
                  ))}
@@ -271,14 +271,14 @@ export default function LandingContent({ user }: { user: any }) {
 
            {/* Visual UI Mockup */}
            <div className="flex-1 relative w-full h-[500px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu z-10">
-                 <div className="h-16 border-b border-white/10 flex items-center px-6 gap-4 bg-black/60 shrink-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-3xl border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden flex flex-col transform-gpu z-10 transition-colors duration-500">
+                 <div className="h-16 border-b border-slate-200 dark:border-white/10 flex items-center px-6 gap-4 bg-slate-100 dark:bg-black/60 shrink-0 transition-colors duration-500">
                     <div className="flex gap-2">
                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
                        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
                     </div>
-                    <div className="text-white/60 text-xs font-bold font-headline tracking-widest pl-4 border-l border-white/10">UCABOT ENGINE</div>
+                    <div className="text-slate-500 dark:text-white/60 text-xs font-bold font-headline tracking-widest pl-4 border-l border-slate-300 dark:border-white/10">UCABOT ENGINE</div>
                  </div>
 
                  {/* Chat mock messages */}
@@ -286,10 +286,10 @@ export default function LandingContent({ user }: { user: any }) {
                     <div className="self-end bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-lg transform-gpu transition-all">
                       <p className="text-sm font-medium">¿Cuáles son los 3 conceptos clave de este PDF sobre Algoritmos?</p>
                     </div>
-                    <div className="self-start bg-slate-800 text-white p-4 rounded-2xl rounded-tl-none max-w-[90%] shadow-lg border border-white/5 relative group transform-gpu">
+                    <div className="self-start bg-white dark:bg-slate-800 text-slate-800 dark:text-white p-4 rounded-2xl rounded-tl-none max-w-[90%] shadow-lg border border-slate-200 dark:border-white/5 relative group transform-gpu">
                       <div className="absolute -left-3 -top-3 w-8 h-8 bg-cta rounded-full flex items-center justify-center shadow-lg"><Bot className="w-4 h-4 text-black" /></div>
                       <div className="pl-2">
-                        <p className="text-sm font-medium leading-relaxed text-slate-200">
+                        <p className="text-sm font-medium leading-relaxed text-slate-600 dark:text-slate-200">
                           Basado en el documento "Estructuras2026.pdf", los 3 puntos clave son:<br/><br/>
                           <span className="text-cta font-bold">1. Complejidad Ciclomática:</span> Análisis de rendimiento Big O.<br/>
                           <span className="text-cta font-bold">2. Grafos Dirigidos:</span> Implementación con matrices de adyacencia.<br/>
@@ -300,10 +300,10 @@ export default function LandingContent({ user }: { user: any }) {
                  </div>
                  
                  {/* Input mock */}
-                 <div className="p-4 bg-slate-900 shrink-0">
-                    <div className="w-full h-12 bg-black/50 rounded-xl border border-white/10 flex items-center px-4 overflow-hidden relative">
-                       <span className="block w-2/3 h-2 bg-white/20 rounded-full transform-gpu relative z-10 overflow-hidden">
-                         <span className="absolute inset-0 bg-white/40 w-1/4 animate-[translateX_2s_infinite]"></span>
+                 <div className="p-4 bg-slate-50 dark:bg-slate-900 shrink-0 transition-colors duration-500">
+                    <div className="w-full h-12 bg-white dark:bg-black/50 rounded-xl border border-slate-300 dark:border-white/10 flex items-center px-4 overflow-hidden relative shadow-sm dark:shadow-none">
+                       <span className="block w-2/3 h-2 bg-slate-200 dark:bg-white/20 rounded-full transform-gpu relative z-10 overflow-hidden">
+                         <span className="absolute inset-0 bg-slate-400 dark:bg-white/40 w-1/4 animate-[translateX_2s_infinite]"></span>
                        </span>
                     </div>
                  </div>
